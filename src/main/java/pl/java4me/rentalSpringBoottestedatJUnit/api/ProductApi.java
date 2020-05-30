@@ -23,44 +23,35 @@ public class ProductApi {
         return productManager.findAll();
     }
 
-//    @GetMapping
-//    public Optional<Product> getById(@RequestParam Long id){
-//        return productManager.findById(id);
-//    }
-
     @GetMapping("/get/{id}")
     public Optional<Product> getById(@PathVariable Long id){
         return productManager.findById(id);
     }
+
+//    another way, using @RequestParam and then /api/products/get?id=3
+//    @GetMapping("/get")
+//    public Optional<Product> getById(@RequestParam Long id){
+//        return productManager.findById(id);
+//    }
 
     @PostMapping("/add")
     public Product addProduct(@RequestBody Product product){
         return productManager.save(product);
     }
 
-
-//    @DeleteMapping
-//    public void deleteProduct(@RequestParam Long id){
-//        productManager.deleteById(id);
-//    }
-
     @DeleteMapping("/delete/{id}")
     public void deleteProduct(@PathVariable Long id){
         productManager.deleteById(id);
     }
 
-    //cannot to be 2 PutMapping annotations at the same time, so below is the right one
-//    @PutMapping
-//    public Product updateProduct(@RequestBody Product product){
-//        return productManager.save(product);
+//    another way, using @RequestParam and then /api/products/delete?id=2
+//    @DeleteMapping("/delete")
+//    public void deleteProduct(@RequestParam Long id){
+//        productManager.deleteById(id);
 //    }
 
-//    @PutMapping
-//    public void assignProductToCustomer(@RequestParam Long idProduct, @RequestParam Long idCustomer){
-//        productManager.addProductToCustomer(idProduct, idCustomer);
-//    }
-
-//    @PutMapping
+//    these two methods don't work because of 1-way bindind (instead of 2-way binding)
+//    @PutMapping("/update")
 //    public Product assignProductToCustomer(@RequestParam Long idProduct, @RequestParam Long idCustomer){
 //        return productManager.addProductToCustomer(idProduct, idCustomer);
 //    }

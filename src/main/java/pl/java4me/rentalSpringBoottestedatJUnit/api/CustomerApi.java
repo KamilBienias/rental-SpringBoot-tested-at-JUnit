@@ -26,34 +26,31 @@ public class CustomerApi {
         return customerManager.findAll();
     }
 
-//    @GetMapping
-//    public Optional<Customer> getById(@RequestParam Long id){
-//        return customerManager.findById(id);
-//    }
-
     @GetMapping("/get/{id}")
     public Optional<Customer> getById(@PathVariable Long id){
         return customerManager.findById(id);
     }
+
+//    another way, using @RequestParam and then /api/customers/get?id=2
+//    @GetMapping("/get")
+//    public Optional<Customer> getById(@RequestParam Long id){
+//        return customerManager.findById(id);
+//    }
 
     @PostMapping("/add")
     public Customer addCustomer(@RequestBody Customer customer){
         return customerManager.save(customer);
     }
 
-//    @DeleteMapping
-//    public void deleteCustomer(@RequestParam Long id){
-//        customerManager.deleteById(id);
-//    }
-
     @DeleteMapping("/delete/{id}")
     public void deleteCustomer(@PathVariable Long id){
         customerManager.deleteById(id);
     }
 
-//    @PutMapping("/update/{idProduct}/{idCustomer}")
-//    public Customer assignProductToCustomer(@PathVariable Long idProduct, @PathVariable Long idCustomer){
-//        return customerManager.addProductToCustomer(idProduct, idCustomer);
+//    another way, using @RequestParam and then /api/customers/delete?id=2
+//    @DeleteMapping("/delete")
+//    public void deleteCustomer(@RequestParam Long id){
+//        customerManager.deleteById(id);
 //    }
 
     @PutMapping("/update")
@@ -61,8 +58,9 @@ public class CustomerApi {
         return customerManager.addProductToCustomer(idProduct, idCustomer);
     }
 
-    //    @PutMapping
-//    public Customer updateCustomer(@RequestBody Customer customer){
-//        return customerManager.save(customer);
+//    another way, using @PathVariable then /api/customers/update/3/2
+//    @PutMapping("/update/{idProduct}/{idCustomer}")
+//    public Customer assignProductToCustomer(@PathVariable Long idProduct, @PathVariable Long idCustomer){
+//        return customerManager.addProductToCustomer(idProduct, idCustomer);
 //    }
 }
